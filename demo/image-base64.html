@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>image图片转base64编码demo</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            padding: 16px 60px;
+            margin: 0 auto;
+        }
+
+        .header {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            padding: 8px 16px;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .form-container {
+            border: 1px solid #91d5ff;
+            padding: 8px;
+            margin-bottom: 8px;
+        }
+
+        .form-row {
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .form-item-label {
+            display: inline-block;
+            padding: 0 0 0 10px;
+            width: 110px;
+        }
+
+        .form-item-value,
+        .btn {
+            padding: 0 10px;
+        }
+
+        #base64Code {
+            border: 1px solid rgb(151, 147, 147);
+            padding: 16px;
+            height: 300px;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+
+        .tip-text-row {
+            margin: 8px 0;
+            padding: 16px;
+            background-color: #f6ffed;
+            border: 1px solid #b7eb8f;
+        }
+
+        .img-container {
+            min-height: 50px;
+            padding: 5px 10px;
+            border: 1px solid rgb(151, 147, 147);
+            background-color: #f5f4f4;
+        }
+
+        .img-container img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body onload="pageInit()">
+    <div class="header">image图片转base64编码demo</div>
+    <div class="form-container">
+        <div class="form-row">
+            <span class="form-item-label">选择一个文件: </span>
+            <span class="form-item-value">
+                <input type="file" name="img" id="file-uploader">
+                <button class="btn" onclick="submit()">提交</button>
+            </span>
+        </div>
+    </div>
+    <div id="base64Code"></div>
+    <div class="tip-text-row">
+        可对base64编码字符串进行复制，在浏览器地址栏粘贴以浏览图片。
+    </div>
+    <div class="img-container">
+        <img id="img" src="" alt="暂无图片">
+    </div>
+    <script>
+        function pageInit() { /* 页面加载完成后，设置提示信息 */
+            document.getElementById('base64Code').innerText = "请选择文件后点击提交！";
+            document.getElementById('file-uploader').addEventListener('change', () => {
+                document.getElementById('base64Code').innerText = "请点击提交按钮!";
+                document.getElementById('img').src = "";
+            })
+        }
+
+        /* 读取图片文件内容，返回文件内容的base64编码字符串 */
+        function getBase64OfImg(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        function submit() {
+            const fileInput = document.getElementById('file-uploader');
+            if (fileInput.files.length < 1) {
+                alert("请选择文件!");
+                return;
+            }
+            const file = fileInput.files[0];
+            getBase64OfImg(file).then(res => {
+                // console.log(`base64字符串：\n ${res}`);
+                document.getElementById('base64Code').innerText = res;
+                document.getElementById('img').src = res;
+            }).catch(error => {
+                // console.error(`图片转base64出错：${error}`);
+                document.getElementById('base64Code').innerText = error;
+            })
+        }
+    </script>
+</body>
+
+</html>
