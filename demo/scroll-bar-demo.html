@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动条demo</title>
+    <link rel="stylesheet/less" type="text/css" href="scroll-bar.less"/>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        #container {
+            height: 75%;
+            width: 95%;
+            border: 1px solid #cbcbcb;
+            border-radius: 4px;
+            padding: 18px;
+            margin: 20px;
+        }
+
+        .children {
+            height: 80px;
+            width: calc(100% - 10px);
+            line-height: 80px;
+            border: 1px solid #cbcbcb;
+            border-radius: 4px;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+<div id="container" class="scroll-bar"></div>
+<script>
+    function _init() {
+        var containerElement = document.getElementById('container');
+        containerElement.classList.add('scroll-bar');
+        var childrenNum = 30;
+        for (let i = 0; i < childrenNum; i++) {
+            const divElement = document.createElement('div');
+            divElement.classList.add('children');
+            containerElement.appendChild(divElement);
+        }
+    }
+</script>
+<!--  由于滚动条样式文件为less文件，需要解析成css才能被浏览器使用  -->
+<script src="https://cdn.jsdelivr.net/npm/less@4" onload="_init()"></script>
+</body>
+</html>

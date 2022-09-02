@@ -1,0 +1,49 @@
+// 滚动条样式
+.scroll-bar {
+
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  &:hover {
+    overflow-y: auto;
+  }
+
+  /* 设置滚动条的整体样式 */
+  &::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+
+  /* 鼠标悬浮在滚动条上时改变其背景色*/
+  &::-webkit-scrollbar:hover {
+    background-color: #e5e5e5;
+  }
+
+  /* 滚动槽样式 */
+  &::-webkit-scrollbar-track {
+    border-radius: 6px;
+    -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 10%);
+    background: #EDEDED;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+
+  }
+
+  /* 滚动滑块样式 */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    -webkit-box-shadow: inset 0 0 5px rgb(157 157 157 / 10%);
+    background: #cbcbcb;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+  }
+}
