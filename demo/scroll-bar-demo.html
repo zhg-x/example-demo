@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>滚动条demo</title>
     <link rel="stylesheet/less" type="text/css" href="scroll-bar.less"/>
+    <link rel="stylesheet" type="text/css" href="../css/demo.css">
     <style>
         html, body {
             padding: 0;
@@ -14,7 +15,7 @@
 
         #container {
             height: 75%;
-            width: 95%;
+            width: 75%;
             border: 1px solid #cbcbcb;
             border-radius: 4px;
             padding: 18px;
@@ -29,15 +30,23 @@
             border-radius: 4px;
             margin: 8px 0;
         }
+
+        div.warning-tip {
+            width: 75%;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
 <div id="container" class="scroll-bar"></div>
+<div class="warning-tip">
+    当左侧区域的宽度是相对宽度时，滚动条出现时会挤压左侧区域内容。可以将左侧区域的宽度设置为固定值以解决这个问题。
+</div>
 <script>
     function _init() {
         var containerElement = document.getElementById('container');
         containerElement.classList.add('scroll-bar');
-        var childrenNum = 30;
+        var childrenNum = 10;
         for (let i = 0; i < childrenNum; i++) {
             const divElement = document.createElement('div');
             divElement.classList.add('children');
