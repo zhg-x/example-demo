@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scrollIntoView()方法将滚动条滚动到可视区域</title>
+    <style>
+        #container {
+            width: 80%;
+            height: 600px;
+            border: 1px solid #e5e3e3;
+            border-radius: 4px;
+            overflow: auto;
+        }
+
+        .children-item {
+            height: 50px;
+            padding: 10px 20px;
+            border: 1px dashed #cbc8cb;
+            margin: 5px;
+        }
+
+        #btn-container {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body onload="_initDom()">
+<div id="container"></div>
+<div id="btn-container">
+    <button onclick="scrollToView('id_21')">点击按钮，将元素滚动到可视区域</button>
+</div>
+<script>
+    function _initDom() {
+        const containerElement = document.getElementById('container');
+        const childrenNum = 30;
+        for (let i = 0; i < childrenNum; i++) {
+            const divElement = document.createElement('div');
+            divElement.id = `id_${i + 1}`;
+            divElement.classList.add('children-item');
+            const pElement = document.createElement('p');
+            pElement.appendChild(document.createTextNode(`第 ${i + 1} 个元素`));
+            divElement.appendChild(pElement);
+            containerElement.appendChild(divElement);
+        }
+    }
+
+    function scrollToView(id) {
+        const targetElement = document.getElementById(id);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth', // 设置滚动行为：平滑滚动
+                block: 'center' //  设置滚动的位置：滚动到中间位置
+            })
+        } else {
+            alert(`找不到指定元素[元素id: ${id}]`);
+        }
+    }
+</script>
+</body>
+</html>
